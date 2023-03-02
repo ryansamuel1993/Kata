@@ -31,24 +31,25 @@ namespace Kata.Checkout
             return this;
         }
 
-        public int Total()
+        public double Total()
         {
-            int total = 0;
-            int totalDiscount = 0;
+            double total = 0;
+            double totalDiscount = 0;
             total = scannedItems.Sum(item => GetPrice(item));
             totalDiscount = discounts.Sum(discount => CalculateDiscount(discount, scannedItems));
             return total - totalDiscount;
         }
 
-        private int GetPrice(char sku)
+        private double GetPrice(char sku)
         {
             return products.First(p => p.SKU == sku).Price;
         }
 
-        private int CalculateDiscount(IDiscount discount, char[] cart)
+        private double CalculateDiscount(IDiscount discount, char[] basket)
         {
-            int itemCount = cart.Count(item => item == discount.SKU);
-            return (itemCount / discount.Quantity) * discount.Value;
+            int itemCount = basket.Count(item => item == discount.SKU);
+            double t = (itemCount / discount.Quantity) * discount.Value;
+            return t;
         }
     }
 }

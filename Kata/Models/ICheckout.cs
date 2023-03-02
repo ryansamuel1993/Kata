@@ -5,7 +5,7 @@ namespace Kata.Checkout
     public interface ICheckout
     {
         ICheckout Scan(String scan);
-        int Total();
+        double Total();
         char[] ScannedItems { get; }
     }
 }

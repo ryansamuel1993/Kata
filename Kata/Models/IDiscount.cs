@@ -4,6 +4,6 @@ namespace Kata.Checkout
     {
         char SKU { get; set; }
 		int Quantity { get; set; }
-		int Value { get; set; }
+        double Value { get; set; }
     }
 }

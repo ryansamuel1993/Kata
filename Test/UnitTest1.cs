@@ -22,7 +22,7 @@ namespace Kata.Tests
             IEnumerable<Discount> discounts = new[]
             {
                 new Discount{SKU = 'B', Quantity = 3, Value = 5},
-                new Discount{SKU = 'D', Quantity = 2, Value = 44}
+                new Discount{SKU = 'D', Quantity = 2, Value = 27.5}
             };
 
             checkout = new Checkout.Checkout(products, discounts);
@@ -39,21 +39,28 @@ namespace Kata.Tests
         [InlineData("B", 15)]
         [InlineData("C", 40)]
         [InlineData("D", 55)]
-        public void Scan_one_of_each_item_return_correct_price(string item, int expected)
+        public void Scan_one_of_each_item_return_correct_price(string item, double expected)
         {
             Assert.Equal(expected, checkout.Scan(item).Total());
         }
 
         [Theory]
         [InlineData("BBB", 40)]
-        public void Scan_three_b_expect_discounted_price(string item, int expected)
+        public void Scan_three_b_expect_discounted_price(string item, double expected)
         {
             Assert.Equal(expected, checkout.Scan(item).Total());
         }
 
         [Theory]
-        [InlineData("DD", 44)]
-        public void Scan_two_d_expect_discounted_price(string item, int expected)
+        [InlineData("DD", 82.5)]
+        public void Scan_two_d_expect_discounted_price(string item, double expected)
+        {
+            Assert.Equal(expected, checkout.Scan(item).Total());
+        }
+
+        [Theory]
+        [InlineData("DDD", 137.5)]
+        public void Scan_three_d_expect_discounted_price_only_on_first_two(string item, double expected)
         {
             Assert.Equal(expected, checkout.Scan(item).Total());
         }
