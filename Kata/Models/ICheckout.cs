@@ -6,6 +6,6 @@ namespace Kata.Checkout
     {
         ICheckout Scan(String scan);
         int Total();
-        char[] ScannedProducts { get; }
+        char[] ScannedItems { get; }
     }
 }
